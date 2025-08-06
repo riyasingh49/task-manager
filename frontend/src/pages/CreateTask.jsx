@@ -22,7 +22,7 @@ function CreateTask() {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, form, {
+      await axios.post(`${import.meta.env.VITE_API_URL}/tasks`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate('/dashboard');
@@ -30,6 +30,7 @@ function CreateTask() {
       setError('Task creation failed.');
     }
   };
+  
 
   return (
     <div className="container mt-5" style={{ maxWidth: '600px' }}>
