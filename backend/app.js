@@ -9,7 +9,7 @@ const app = express();
 
 // Correct CORS setup
 app.use(cors({
-  origin: 'https://task-manager-frontend.onrender.com',
+  origin: 'https://task-manager-frontend1-zlfx.onrender.com',
   credentials: true
 }));
 
