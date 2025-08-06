@@ -19,7 +19,6 @@ function Login() {
       setError('Invalid credentials');
     }
   };
-  
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
