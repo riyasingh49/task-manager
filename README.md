@@ -10,6 +10,12 @@ A full-stack task management system built with Node.js, React, Sequelize (Postgr
 - Role-based access (admin/user)
 - Responsive frontend using React
 - Dockerized app for quick deployment
+- Deployed using **Render**
+
+## 🌐 Live Demo
+
+- 🔗 **Frontend**: [[https://your-frontend-url.onrender.com](https://task-manager-frontend1-zlfx.onrender.com/login)) ]
+- 🔗 **Backend API**:[ https://your-backend-url.onrender.com/api](https://task-manager-backend-cev2.onrender.com)
 
 ## 🏗️ Project Structure
 
@@ -28,26 +34,18 @@ task-manager/
 ├── .env
 ├── README.md
 
-## ⚙️ Setup Instructions
+
+## ⚙️ Local Development Setup
 
 ### 1. Clone the Repository
 
 ```bash
 git clone https://github.com/yourusername/task-manager.git
 cd task-manager
-
-
-## ⚙️ Setup Instructions
-
-### 1. Clone the Repository
-
+``` 
+### 2. Backend Environment Setup
+Create a .env file inside the backend/ directory:
 ```bash
-git clone https://github.com/yourusername/task-manager.git
-cd task-manager
-```
-2. Environment Setup
-Create a .env in backend/:
-```
 PORT=5050
 JWT_SECRET=your_jwt_secret
 DB_USER=postgres
@@ -55,11 +53,13 @@ DB_PASSWORD=yourpassword
 DB_NAME=task_manager
 DB_HOST=db
 ```
-4. Run with Docker 🐳
-```
+
+### 3. Run Locally with Docker 🐳
+```bash
 docker-compose up --build
 ```
-5. Access the App
-```
+
+### 4. Access Locally
 Frontend: http://localhost:5173
 Backend API: http://localhost:5050/api
+
