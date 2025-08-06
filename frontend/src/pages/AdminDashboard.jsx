@@ -11,7 +11,7 @@ function AdminDashboard() {
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get('http://localhost:5050/api/auth/users', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       setUsers(res.data);
@@ -22,7 +22,7 @@ function AdminDashboard() {
 
   const fetchTasksForUser = async (userId) => {
     try {
-      const res = await axios.get('http://localhost:5050/api/tasks', {
+      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
         headers: { Authorization: `Bearer ${token}` },
       });
       const userTasks = res.data.filter((task) => task.assignedTo === userId);

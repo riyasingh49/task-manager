@@ -18,7 +18,7 @@ function EditTask() {
     const fetchTask = async () => {
       try {
         const token = localStorage.getItem("token");
-        const res = await axios.get(`http://localhost:5050/api/tasks/${id}`, {
+        const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks/${id}`, {
           headers: { Authorization: `Bearer ${token}` },
         });
         setForm({
@@ -43,7 +43,7 @@ function EditTask() {
     e.preventDefault();
     try {
       const token = localStorage.getItem("token");
-      await axios.put(`http://localhost:5050/api/tasks/${id}`, form, {
+      await axios.put(`${import.meta.env.VITE_API_URL}/tasks/${id}`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate("/dashboard");

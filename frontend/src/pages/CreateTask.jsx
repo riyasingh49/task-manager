@@ -22,7 +22,7 @@ function CreateTask() {
     e.preventDefault();
     const token = localStorage.getItem('token');
     try {
-      await axios.post('http://localhost:5050/api/tasks', form, {
+      await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, form, {
         headers: { Authorization: `Bearer ${token}` },
       });
       navigate('/dashboard');

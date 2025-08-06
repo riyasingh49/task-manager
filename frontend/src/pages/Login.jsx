@@ -11,7 +11,7 @@ function Login() {
   const handleLogin = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post('http://localhost:5050/api/auth/login', { email, password });
+      const res = await axios.post(`${import.meta.env.VITE_API_URL}/auth/login`, { email, password });
       localStorage.setItem('token', res.data.token);
       localStorage.setItem('email', email); // ✅ Store user email
       navigate('/dashboard');
@@ -19,6 +19,7 @@ function Login() {
       setError('Invalid credentials');
     }
   };
+  
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">

@@ -11,13 +11,14 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:5050/api/auth/register', { email, password, role });
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, { email, password, role });
       alert('Registration successful! Now login.');
     } catch (err) {
-      console.error('Register error:', err.response?.data || err.message); // ⬅️ log full error
+      console.error('Register error:', err.response?.data || err.message);
       setError(err.response?.data?.error || 'Something went wrong');
     }
   };
+  
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
