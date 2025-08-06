@@ -1,18 +1,34 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
+import jwtDecode from 'jwt-decode';
 
 function AdminDashboard() {
   const [users, setUsers] = useState([]);
   const [selectedUserId, setSelectedUserId] = useState('');
   const [tasks, setTasks] = useState([]);
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
+  let role = '';
+  if (token) {
+    const decoded = jwtDecode(token);
+    role = decoded.role;
+  }
+
+  useEffect(() => {
+    if (role !== 'admin') {
+      navigate('/dashboard');
+      return;
+    }
+    fetchUsers();
+  }, [role, navigate]);
 
   const fetchUsers = async () => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/auth/users`, {
+        headers: { Authorization: `Bearer ${token}` }
       });
       setUsers(res.data);
     } catch (err) {
@@ -22,8 +38,9 @@ function AdminDashboard() {
 
   const fetchTasksForUser = async (userId) => {
     try {
-      const res = await axios.get(`${import.meta.env.VITE_API_URL}/tasks`, {
-        headers: { Authorization: `Bearer ${token}` },
+      const res = await axios.get(
+        `${import.meta.env.VITE_API_URL}/tasks`, {
+        headers: { Authorization: `Bearer ${token}` }
       });
       const userTasks = res.data.filter((task) => task.assignedTo === userId);
       setTasks(userTasks);
@@ -31,16 +48,6 @@ function AdminDashboard() {
       setError('Could not load tasks.');
     }
   };
-
-  useEffect(() => {
-    fetchUsers();
-  }, []);
-
-  useEffect(() => {
-    if (selectedUserId) {
-      fetchTasksForUser(Number(selectedUserId));
-    }
-  }, [selectedUserId]);
 
   return (
     <div className="container mt-5">
