@@ -11,14 +11,17 @@ function Register() {
   const handleRegister = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, { email, password, role });
+      await axios.post(`${import.meta.env.VITE_API_URL}/auth/register`, {
+        email,
+        password,
+        role
+      });
       alert('Registration successful! Now login.');
     } catch (err) {
       console.error('Register error:', err.response?.data || err.message);
       setError(err.response?.data?.error || 'Something went wrong');
     }
   };
-  
 
   return (
     <div className="container-fluid d-flex justify-content-center align-items-center min-vh-100 bg-light">
@@ -32,8 +35,7 @@ function Register() {
               className="form-control"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              required
-            />
+              required />
           </div>
           <div className="mb-3">
             <label>Password</label>
@@ -42,22 +44,22 @@ function Register() {
               className="form-control"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
-              required
-            />
+              required />
           </div>
           <div className="mb-3">
             <label>Role</label>
             <select
               className="form-select"
               value={role}
-              onChange={(e) => setRole(e.target.value)}
-            >
+              onChange={(e) => setRole(e.target.value)}>
               <option value="user">User</option>
               <option value="admin">Admin</option>
             </select>
           </div>
           {error && <div className="text-danger mb-3">{error}</div>}
-          <button type="submit" className="btn btn-success w-100">Register</button>
+          <button type="submit" className="btn btn-success w-100">
+            Register
+          </button>
         </form>
         <p className="text-center mt-3">
           Already have an account? <Link to="/login">Login here</Link>
