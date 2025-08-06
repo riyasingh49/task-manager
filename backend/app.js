@@ -7,12 +7,23 @@ const taskRoutes = require('./routes/tasks');
 
 const app = express();
 
-// Correct CORS setup
+// ✅ CORS setup to allow both localhost and deployed frontend
+const allowedOrigins = [
+  'http://localhost:5173',
+  'https://task-manager-frontend1-zlfx.onrender.com'
+];
+
 app.use(cors({
-  origin: 'https://task-manager-frontend1.onrender.com',
+  origin: (origin, callback) => {
+    // Allow requests with no origin (like mobile apps or curl)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  },
   credentials: true
 }));
-
 
 app.use(express.json());
 
